@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuildTracker - Your Construction Career Starts Here</title>
+    <title>Job Application Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
 </head>
 <body>
@@ -48,6 +48,9 @@
                     <label for="loginPassword">Password</label>
                     <input type="password" id="loginPassword" required>
                 </div>
+                <div class="form-group">
+                    <small class="error-message" id="loginError" role="alert" aria-live="polite"></small>
+                </div>
                 <button type="submit" class="btn btn-primary btn-full">
                     <span class="btn-text">Sign In</span>
                     <span class="btn-loading">Signing In...</span>
@@ -81,12 +84,13 @@
                 <div class="form-group">
                     <label for="registerPassword">Password</label>
                     <input type="password" id="registerPassword" name="password" required>
+                    <small class="error-message" id="passwordError"></small>
                 </div>
 
                 <div class="form-group">
                     <label for="registerConfirm">Confirm Password</label>
                     <input type="password" id="registerConfirm" name="confirm" required>
-                    <small class="error-message" id="confirmError"></small>
+                    <small class="error-message" id="confirmPasswordError"></small>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-full">Register</button>
@@ -170,6 +174,12 @@
             const button = this.querySelector('button[type="submit"]');
             const btnText = button.querySelector('.btn-text');
             const btnLoading = button.querySelector('.btn-loading');
+            const loginError = document.getElementById('loginError');
+
+            if (loginError) {
+                loginError.textContent = '';
+                loginError.style.display = 'none';
+            }
             
             // Show loading state
             button.disabled = true;
@@ -197,11 +207,17 @@
                         window.location.href = '/dashboard';
                     }, 1000);
                 } else {
-                    showMessage(data.error || 'Login failed', 'error');
+                    if (loginError) {
+                        loginError.textContent = data.error || 'Login failed';
+                        loginError.style.display = 'block';
+                    }
                 }
             } catch (error) {
                 console.error('Login error:', error);
-                showMessage('Network error. Please try again.', 'error');
+                if (loginError) {
+                    loginError.textContent = 'Network error. Please try again.';
+                    loginError.style.display = 'block';
+                }
             } finally {
                 // Reset button state
                 button.disabled = false;
@@ -254,6 +270,14 @@
                     if (errorEl) {
                         errorEl.textContent = data.errors[field];
                         errorEl.style.display = 'block';
+                        return;
+                    }
+                    if (field === 'confirmPassword') {
+                        const confirmEl = document.getElementById('confirmPasswordError');
+                        if (confirmEl) {
+                            confirmEl.textContent = data.errors[field];
+                            confirmEl.style.display = 'block';
+                        }
                     }
                 });
             } else if (data.error) {

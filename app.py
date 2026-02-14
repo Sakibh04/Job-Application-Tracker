@@ -167,13 +167,14 @@ def register():
 
     try:
         with get_db_connection() as conn:
-            # Check if username already exists
-            if conn.execute('SELECT id FROM users WHERE username = ?', (username,)).fetchone():
-                errors['username'] = "Username already exists"
+            # Check if username or email already exists
+            username_exists = conn.execute('SELECT id FROM users WHERE username = ?', (username,)).fetchone()
+            email_exists = conn.execute('SELECT id FROM users WHERE email = ?', (email,)).fetchone()
 
-            # Check if email already exists
-            if conn.execute('SELECT id FROM users WHERE email = ?', (email,)).fetchone():
-                errors['email'] = "Email already exists"
+            if username_exists or email_exists:
+                message = "Username or email is not available"
+                errors['username'] = message
+                errors['email'] = message
 
             if errors:
                 return jsonify({"errors": errors}), 400

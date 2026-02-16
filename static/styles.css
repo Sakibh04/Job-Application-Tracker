@@ -2,12 +2,12 @@
 
 :root {
     --ink: #1c1b1a;
-    --paper: #f6f2ea;
-    --accent: #dd6b4d;
-    --accent-dark: #b75136;
+    --paper: #f2efe9;
+    --accent: #ff6b35;
+    --accent-dark: #e55a2e;
     --muted: #6f6a63;
-    --line: #e4ded4;
-    --panel: #fbf8f2;
+    --line: #e1dcd4;
+    --panel: #ffffff;
     --shadow: 0 20px 60px rgba(28, 27, 26, 0.12);
     --soft-shadow: 0 8px 24px rgba(28, 27, 26, 0.08);
 }
@@ -20,10 +20,7 @@
 
 body {
     font-family: 'Space Grotesk', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:
-        radial-gradient(1200px 700px at 10% 10%, rgba(221, 107, 77, 0.18), transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, rgba(80, 106, 133, 0.18), transparent 55%),
-        linear-gradient(180deg, #f5f0e7 0%, #efe8dc 100%);
+    background: #ff6b35;
     color: var(--ink);
     min-height: 100vh;
     padding: 24px;
@@ -40,7 +37,7 @@ body {
 }
 
 .header {
-    background: linear-gradient(135deg, #f7efe4 0%, #f1e6d7 100%);
+    background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%);
     color: var(--ink);
     padding: 34px 34px 26px;
     position: relative;
@@ -62,6 +59,7 @@ body {
     font-size: 2.5em;
     margin-bottom: 4px;
     letter-spacing: -0.5px;
+    color: #fff7f2;
 }
 
 .header-content p {
@@ -82,24 +80,25 @@ body {
 }
 
 .stat-item {
-    background: #fff7ee;
+    background: rgba(255, 255, 255, 0.08);
     padding: 12px 18px;
     border-radius: 16px;
     text-align: left;
-    border: 1px solid rgba(221, 107, 77, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     min-width: 140px;
+    color: #fff7f2;
 }
 
 .stat-number {
     font-size: 1.6em;
     font-weight: 700;
     display: block;
-    color: var(--accent-dark);
+        color: #ff9d7a;
 }
 
 .controls {
     padding: 26px 30px;
-    background: #fdfaf4;
+    background: #ffffff;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -139,7 +138,7 @@ body {
 .btn-primary {
     background: var(--accent);
     color: #fffaf6;
-    border-color: rgba(221, 107, 77, 0.4);
+    border-color: rgba(255, 107, 53, 0.5);
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -149,9 +148,9 @@ body {
 }
 
 .btn-success {
-    background: #2f7d5b;
-    color: #f7f8f5;
-    border-color: rgba(47, 125, 91, 0.3);
+    background: #1f1f1f;
+    color: #fff7f2;
+    border-color: rgba(0, 0, 0, 0.4);
 }
 
 .btn-success:hover:not(:disabled) {
@@ -160,8 +159,8 @@ body {
 }
 
 .btn-secondary {
-    background: #2f2b27;
-    color: #f7f1e7;
+    background: #111111;
+    color: #fff7f2;
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -170,8 +169,8 @@ body {
 }
 
 .btn-info {
-    background: #4a78a1;
-    color: #f6fbff;
+    background: #2b2b2b;
+    color: #fff7f2;
 }
 
 .btn-info:hover:not(:disabled) {
@@ -181,18 +180,18 @@ body {
 
 .btn-outline {
     background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--line);
+    color: #111111;
+    border: 1px solid #111111;
 }
 
 .btn-outline:hover:not(:disabled) {
-    background: #f0e6d9;
-    color: var(--ink);
+    background: #111111;
+    color: #fff7f2;
 }
 
 .btn-danger {
-    background: #b6453b;
-    color: #fff2f2;
+    background: #ff6b35;
+    color: #fff7f2;
 }
 
 .btn-danger:hover:not(:disabled) {
@@ -223,8 +222,8 @@ select, input[type="text"], input[type="url"], input[type="date"] {
 
 select:focus, input:focus {
     outline: none;
-    border-color: rgba(221, 107, 77, 0.6);
-    box-shadow: 0 0 0 3px rgba(221, 107, 77, 0.15);
+    border-color: rgba(255, 107, 53, 0.6);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
 }
 
 .loading {
@@ -266,8 +265,8 @@ table {
 }
 
 th {
-    background: #f4ede2;
-    color: var(--ink);
+    background: #111111;
+    color: #fff7f2;
     padding: 16px 15px;
     text-align: left;
     font-weight: 600;
@@ -279,7 +278,7 @@ th {
 }
 
 th:hover {
-    background: #efe6d9;
+    background: #1f1f1f;
 }
 
 th::after {
@@ -306,7 +305,7 @@ td {
 }
 
 tr:hover {
-    background-color: #fbf6ee;
+    background-color: #fff4ef;
 }
 
 .status {
@@ -317,28 +316,28 @@ tr:hover {
     text-align: center;
     color: var(--ink);
     display: inline-block;
-    background: #f2ece4;
+    background: #f7f1e8;
     border: 1px solid var(--line);
 }
 
 .status.applied { 
-    background: #e6f0fb; 
-    color: #23527c;
+    background: #ffe4d6; 
+    color: #7a2f1d;
 }
 
 .status.interview { 
-    background: #fff3cd; 
-    color: #6b5200; 
+    background: #fff1d6; 
+    color: #6b4b00; 
 }
 
 .status.offer { 
-    background: #e3f5ea; 
-    color: #1f5d3d; 
+    background: #e9efe6; 
+    color: #1f3f2e; 
 }
 
 .status.rejected { 
-    background: #fde7e8; 
-    color: #8b2e2e; 
+    background: #ffe0d7; 
+    color: #7a2a1f; 
 }
 
 .status.withdrawn { 
@@ -374,7 +373,7 @@ tr:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(28, 27, 26, 0.45);
+    background-color: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(6px);
 }
 
@@ -409,12 +408,12 @@ tr:hover {
     align-items: center;
     padding: 24px 30px;
     border-bottom: 1px solid var(--line);
-    background: #f7efe3;
+    background: #111111;
 }
 
 .modal-header h2 {
     margin: 0;
-    color: var(--ink);
+    color: #fff7f2;
     font-family: 'Fraunces', 'Times New Roman', serif;
 }
 
@@ -422,12 +421,12 @@ tr:hover {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    color: #6f6a63;
+    color: #f1b6a3;
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .close:hover {
-    color: #b6453b;
+    color: #ff6b35;
     transform: rotate(6deg);
 }
 
@@ -472,8 +471,8 @@ tr:hover {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: rgba(221, 107, 77, 0.6);
-    box-shadow: 0 0 0 3px rgba(221, 107, 77, 0.18);
+    border-color: rgba(255, 107, 53, 0.6);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
 }
 
 .form-group textarea {
@@ -487,7 +486,7 @@ tr:hover {
     gap: 12px;
     padding: 22px 30px;
     border-top: 1px solid var(--line);
-    background: #f7f0e5;
+    background: #fff7f2;
 }
 
 .empty-state {
@@ -502,7 +501,7 @@ tr:hover {
 }
 
 .reminder-badge {
-    background: #b6453b;
+    background: #ff6b35;
     color: white;
     padding: 4px 8px;
     border-radius: 12px;

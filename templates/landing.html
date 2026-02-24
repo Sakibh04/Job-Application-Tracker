@@ -1,310 +1,398 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Application Tracker</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
-</head>
-<body>
-    <div class="landing-container">
-        <div class="hero-section">
-            <div class="slideshow">
-                <img src="{{ url_for('static', filename='bg1.jpg') }}" class="active" alt="Background 1">
-                <img src="{{ url_for('static', filename='bg2.jpg') }}" alt="Background 2">
-                <img src="{{ url_for('static', filename='bg3.jpg') }}" alt="Background 3">
-            </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Job Application Tracker</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css') }}"
+        />
+    </head>
+    <body class="landing-page">
+        <div class="landing-container">
+            <div class="hero-section">
+                <div class="slideshow">
+                    <img
+                        src="{{ url_for('static', filename='bg1.jpg') }}"
+                        class="active"
+                        alt="Background 1"
+                    />
+                    <img
+                        src="{{ url_for('static', filename='bg2.jpg') }}"
+                        alt="Background 2"
+                    />
+                    <img
+                        src="{{ url_for('static', filename='bg3.jpg') }}"
+                        alt="Background 3"
+                    />
+                </div>
 
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">Job Tracker</h1>
-                <p class="hero-subtitle">Transform your job search with intelligent tracking, powerful insights, and seamless organization. Your dream career awaits.</p>
-                
-                <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="showRegisterForm()">
-                        <span>Get Started</span>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Job Tracker</h1>
+                    <p class="hero-subtitle">
+                        Transform your job search with intelligent tracking,
+                        powerful insights, and seamless organization. Your dream
+                        career awaits.
+                    </p>
+
+                    <div class="cta-buttons">
+                        <button
+                            class="btn btn-primary"
+                            onclick="showRegisterForm()"
+                        >
+                            <span>Get Started</span>
+                        </button>
+                        <button
+                            class="btn btn-outline"
+                            onclick="showLoginForm()"
+                        >
+                            <span>Sign In</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="auth-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Welcome Back</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginUsername">Username or Email</label>
+                        <input type="text" id="loginUsername" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required />
+                    </div>
+                    <div class="form-group">
+                        <small
+                            class="error-message"
+                            id="loginError"
+                            role="alert"
+                            aria-live="polite"
+                        ></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span class="btn-text">Sign In</span>
+                        <span class="btn-loading">Signing In...</span>
                     </button>
-                    <button class="btn btn-outline" onclick="showLoginForm()">
-                        <span>Sign In</span>
+                </form>
+                <p class="auth-switch">
+                    Don't have an account?
+                    <a href="#" onclick="switchToRegister()">Sign Up</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div id="registerModal" class="auth-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create Account</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            name="email"
+                            required
+                        />
+                        <small class="error-message" id="emailError"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerUsername">Username</label>
+                        <input
+                            type="text"
+                            id="registerUsername"
+                            name="username"
+                            required
+                        />
+                        <small class="error-message" id="usernameError"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            name="password"
+                            required
+                        />
+                        <small class="error-message" id="passwordError"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerConfirm">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="registerConfirm"
+                            name="confirm"
+                            required
+                        />
+                        <small
+                            class="error-message"
+                            id="confirmPasswordError"
+                        ></small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        Register
                     </button>
-                </div>
+                </form>
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="#" onclick="switchToLogin()">Sign In</a>
+                </p>
             </div>
         </div>
-    </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="auth-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Welcome Back</h2>
-                <span class="close" onclick="closeModal()">&times;</span>
-            </div>
-            <form id="loginForm" class="auth-form">
-                <div class="form-group">
-                    <label for="loginUsername">Username or Email</label>
-                    <input type="text" id="loginUsername" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" required>
-                </div>
-                <div class="form-group">
-                    <small class="error-message" id="loginError" role="alert" aria-live="polite"></small>
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">
-                    <span class="btn-text">Sign In</span>
-                    <span class="btn-loading">Signing In...</span>
-                </button>
-            </form>
-            <p class="auth-switch">Don't have an account? <a href="#" onclick="switchToRegister()">Sign Up</a></p>
-        </div>
-    </div>
+        <!-- Error/Success Messages -->
+        <div id="messageContainer" class="message-container"></div>
 
-    <!-- Register Modal -->
-    <div id="registerModal" class="auth-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Create Account</h2>
-                <span class="close" onclick="closeModal()">&times;</span>
-            </div>
+        <script>
+            // Modal Management
+            function showLoginForm() {
+                console.log("Showing login form");
+                document.getElementById("loginModal").style.display = "flex";
+                document.getElementById("registerModal").style.display = "none";
+                setTimeout(() => {
+                    document.getElementById("loginUsername").focus();
+                }, 100);
+            }
 
-            <form id="registerForm" class="auth-form">
-                <div class="form-group">
-                    <label for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" name="email" required>
-                    <small class="error-message" id="emailError"></small>
-                </div>
+            function showRegisterForm() {
+                console.log("Showing register form");
+                document.getElementById("registerModal").style.display = "flex";
+                document.getElementById("loginModal").style.display = "none";
+                setTimeout(() => {
+                    document.getElementById("registerUsername").focus();
+                }, 100);
+            }
 
-                <div class="form-group">
-                    <label for="registerUsername">Username</label>
-                    <input type="text" id="registerUsername" name="username" required>
-                    <small class="error-message" id="usernameError"></small>
-                </div>
+            function closeModal() {
+                console.log("Closing modals");
+                document.getElementById("loginModal").style.display = "none";
+                document.getElementById("registerModal").style.display = "none";
+            }
 
-                <div class="form-group">
-                    <label for="registerPassword">Password</label>
-                    <input type="password" id="registerPassword" name="password" required>
-                    <small class="error-message" id="passwordError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="registerConfirm">Confirm Password</label>
-                    <input type="password" id="registerConfirm" name="confirm" required>
-                    <small class="error-message" id="confirmPasswordError"></small>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-full">Register</button>
-            </form>
-
-            <p class="auth-switch">
-                Already have an account? <a href="#" onclick="switchToLogin()">Sign In</a>
-            </p>
-        </div>
-    </div>
-
-    <!-- Error/Success Messages -->
-    <div id="messageContainer" class="message-container"></div>
-
-    <script>
-    // Modal Management
-        function showLoginForm() {
-            console.log('Showing login form');
-            document.getElementById('loginModal').style.display = 'flex';
-            document.getElementById('registerModal').style.display = 'none';
-            setTimeout(() => {
-                document.getElementById('loginUsername').focus();
-            }, 100);
-        }
-
-        function showRegisterForm() {
-            console.log('Showing register form');
-            document.getElementById('registerModal').style.display = 'flex';
-            document.getElementById('loginModal').style.display = 'none';
-            setTimeout(() => {
-                document.getElementById('registerUsername').focus();
-            }, 100);
-        }
-
-        function closeModal() {
-            console.log('Closing modals');
-            document.getElementById('loginModal').style.display = 'none';
-            document.getElementById('registerModal').style.display = 'none';
-        }
-
-        function switchToRegister() {
-            closeModal();
-            showRegisterForm();
-        }
-
-        function switchToLogin() {
-            closeModal();
-            showLoginForm();
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const registerModal = document.getElementById('registerModal');
-            if (event.target === loginModal || event.target === registerModal) {
+            function switchToRegister() {
                 closeModal();
+                showRegisterForm();
             }
-        }
 
-        // Message Display
-        function showMessage(message, type = 'info') {
-            const container = document.getElementById('messageContainer');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
-            messageDiv.textContent = message;
-            
-            container.appendChild(messageDiv);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                if (messageDiv.parentElement) {
-                    messageDiv.remove();
+            function switchToLogin() {
+                closeModal();
+                showLoginForm();
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function (event) {
+                const loginModal = document.getElementById("loginModal");
+                const registerModal = document.getElementById("registerModal");
+                if (
+                    event.target === loginModal ||
+                    event.target === registerModal
+                ) {
+                    closeModal();
                 }
-            }, 5000);
-        }
+            };
 
-        // Form Submission Handlers
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const button = this.querySelector('button[type="submit"]');
-            const btnText = button.querySelector('.btn-text');
-            const btnLoading = button.querySelector('.btn-loading');
-            const loginError = document.getElementById('loginError');
+            // Message Display
+            function showMessage(message, type = "info") {
+                const container = document.getElementById("messageContainer");
+                const messageDiv = document.createElement("div");
+                messageDiv.className = `message ${type}`;
+                messageDiv.textContent = message;
 
-            if (loginError) {
-                loginError.textContent = '';
-                loginError.style.display = 'none';
+                container.appendChild(messageDiv);
+
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    if (messageDiv.parentElement) {
+                        messageDiv.remove();
+                    }
+                }, 5000);
             }
-            
-            // Show loading state
-            button.disabled = true;
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
-            
-            try {
-                const formData = {
-                    username: document.getElementById('loginUsername').value.trim(),
-                    password: document.getElementById('loginPassword').value
-                };
-                                
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
 
-                const data = await response.json();
+            // Form Submission Handlers
+            document
+                .getElementById("loginForm")
+                .addEventListener("submit", async function (e) {
+                    e.preventDefault();
 
-                if (response.ok) {
-                    setTimeout(() => {
-                        window.location.href = '/dashboard';
-                    }, 1000);
-                } else {
+                    const button = this.querySelector('button[type="submit"]');
+                    const btnText = button.querySelector(".btn-text");
+                    const btnLoading = button.querySelector(".btn-loading");
+                    const loginError = document.getElementById("loginError");
+
                     if (loginError) {
-                        loginError.textContent = data.error || 'Login failed';
-                        loginError.style.display = 'block';
+                        loginError.textContent = "";
+                        loginError.style.display = "none";
                     }
-                }
-            } catch (error) {
-                console.error('Login error:', error);
-                if (loginError) {
-                    loginError.textContent = 'Network error. Please try again.';
-                    loginError.style.display = 'block';
-                }
-            } finally {
-                // Reset button state
-                button.disabled = false;
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
-            }
-        });
 
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+                    // Show loading state
+                    button.disabled = true;
+                    btnText.style.display = "none";
+                    btnLoading.style.display = "inline";
 
-    const button = this.querySelector('button[type="submit"]');
+                    try {
+                        const formData = {
+                            username: document
+                                .getElementById("loginUsername")
+                                .value.trim(),
+                            password:
+                                document.getElementById("loginPassword").value,
+                        };
 
-    // Clear previous errors
-    document.querySelectorAll('.error-message').forEach(el => {
-        el.textContent = '';
-        el.style.display = 'none';
-    });
+                        const response = await fetch("/api/login", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formData),
+                        });
 
-    // Show loading state
-    button.disabled = true;
+                        const data = await response.json();
 
-    try {
-        const formData = {
-            username: document.getElementById('registerUsername').value.trim(),
-            email: document.getElementById('registerEmail').value.trim(),
-            password: document.getElementById('registerPassword').value,
-            confirmPassword: document.getElementById('registerConfirm').value  // ✅ include confirm
-        };
-
-        console.log('Sending register request:', formData);
-
-        const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            setTimeout(() => {
-                window.location.href = '/dashboard';
-            }, 1000);
-        } else {
-            // ✅ If backend returns structured field errors
-            if (data.errors) {
-                Object.keys(data.errors).forEach(field => {
-                    const errorEl = document.getElementById(field + 'Error');
-                    if (errorEl) {
-                        errorEl.textContent = data.errors[field];
-                        errorEl.style.display = 'block';
-                        return;
-                    }
-                    if (field === 'confirmPassword') {
-                        const confirmEl = document.getElementById('confirmPasswordError');
-                        if (confirmEl) {
-                            confirmEl.textContent = data.errors[field];
-                            confirmEl.style.display = 'block';
+                        if (response.ok) {
+                            setTimeout(() => {
+                                window.location.href = "/dashboard";
+                            }, 1000);
+                        } else {
+                            if (loginError) {
+                                loginError.textContent =
+                                    data.error || "Login failed";
+                                loginError.style.display = "block";
+                            }
                         }
+                    } catch (error) {
+                        console.error("Login error:", error);
+                        if (loginError) {
+                            loginError.textContent =
+                                "Network error. Please try again.";
+                            loginError.style.display = "block";
+                        }
+                    } finally {
+                        // Reset button state
+                        button.disabled = false;
+                        btnText.style.display = "inline";
+                        btnLoading.style.display = "none";
                     }
                 });
-            } else if (data.error) {
-                // ✅ fallback to general error
-                showMessage(data.error, 'error');
-            }
-        }
-    } catch (error) {
-        console.error('Register error:', error);
-        showMessage('Network error. Please try again.', 'error');
-    } finally {
-        // Reset button state
-        button.disabled = false;
-    }
-});
-// Background Slideshow
-document.addEventListener("DOMContentLoaded", () => {
-    const slides = document.querySelectorAll(".slideshow img");
-    let current = 0;
 
-    setInterval(() => {
-        slides[current].classList.remove("active");
-        current = (current + 1) % slides.length;
-        slides[current].classList.add("active");
-    }, 4000); // change every 7 seconds
-});
+            document
+                .getElementById("registerForm")
+                .addEventListener("submit", async function (e) {
+                    e.preventDefault();
 
-</script>
-</body>
+                    const button = this.querySelector('button[type="submit"]');
+
+                    // Clear previous errors
+                    document
+                        .querySelectorAll(".error-message")
+                        .forEach((el) => {
+                            el.textContent = "";
+                            el.style.display = "none";
+                        });
+
+                    // Show loading state
+                    button.disabled = true;
+
+                    try {
+                        const formData = {
+                            username: document
+                                .getElementById("registerUsername")
+                                .value.trim(),
+                            email: document
+                                .getElementById("registerEmail")
+                                .value.trim(),
+                            password:
+                                document.getElementById("registerPassword")
+                                    .value,
+                            confirmPassword:
+                                document.getElementById("registerConfirm")
+                                    .value, // ✅ include confirm
+                        };
+
+                        console.log("Sending register request:", formData);
+
+                        const response = await fetch("/api/register", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(formData),
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            setTimeout(() => {
+                                window.location.href = "/dashboard";
+                            }, 1000);
+                        } else {
+                            // ✅ If backend returns structured field errors
+                            if (data.errors) {
+                                Object.keys(data.errors).forEach((field) => {
+                                    const errorEl = document.getElementById(
+                                        field + "Error",
+                                    );
+                                    if (errorEl) {
+                                        errorEl.textContent =
+                                            data.errors[field];
+                                        errorEl.style.display = "block";
+                                        return;
+                                    }
+                                    if (field === "confirmPassword") {
+                                        const confirmEl =
+                                            document.getElementById(
+                                                "confirmPasswordError",
+                                            );
+                                        if (confirmEl) {
+                                            confirmEl.textContent =
+                                                data.errors[field];
+                                            confirmEl.style.display = "block";
+                                        }
+                                    }
+                                });
+                            } else if (data.error) {
+                                // ✅ fallback to general error
+                                showMessage(data.error, "error");
+                            }
+                        }
+                    } catch (error) {
+                        console.error("Register error:", error);
+                        showMessage(
+                            "Network error. Please try again.",
+                            "error",
+                        );
+                    } finally {
+                        // Reset button state
+                        button.disabled = false;
+                    }
+                });
+            // Background Slideshow
+            document.addEventListener("DOMContentLoaded", () => {
+                const slides = document.querySelectorAll(".slideshow img");
+                let current = 0;
+
+                setInterval(() => {
+                    slides[current].classList.remove("active");
+                    current = (current + 1) % slides.length;
+                    slides[current].classList.add("active");
+                }, 4000); // change every 7 seconds
+            });
+        </script>
+    </body>
 </html>
